@@ -1,0 +1,31 @@
+server:
+  port: 8102
+
+spring:
+  application:
+    name: consumer
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/rabbitmq?serverTimezone=UTC
+    username: root
+    password: root
+  rabbitmq:
+    virtual-host: /
+    username: admin
+    password: 123456
+    port: 5672
+    host: 127.0.0.1
+    ## 消费端配置
+    listener:
+      simple:
+        concurrency: 5
+        ## manual:手动 ack（确认）
+        acknowledge-mode: manual
+        max-concurrency: 10
+        prefetch: 1
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.xingxin.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

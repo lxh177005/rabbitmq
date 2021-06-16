@@ -1,0 +1,33 @@
+server:
+  port: 8101
+spring:
+  application:
+    name: producer
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/rabbitmq?serverTimezone=UTC
+    username: root
+    password: root
+  rabbitmq:
+    virtual-host: /
+    username: admin
+    password: 123456
+    host: 127.0.0.1
+    port: 5672
+    publisher-confirm-type: correlated    #ack确认
+    publisher-returns: true
+    template:
+      mandatory: true
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.xingxin.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+#yun:
+#  mq:
+#    queue: test_msg_queue
+#    exchange: test_msg_exchange
+#    routing: test_msg_routing
