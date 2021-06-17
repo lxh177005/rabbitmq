@@ -19,4 +19,12 @@
         id, msg_id, exchange, routing_key, try_count, status, create_time, update_time
     </sql>
 
+    <select id="selectRecordMessageFailed" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from record_message rm
+        where rm.status = 2 and rm.try_count &lt; 3
+        limit 0, #{limit,jdbcType=INTEGER}
+    </select>
+
 </mapper>

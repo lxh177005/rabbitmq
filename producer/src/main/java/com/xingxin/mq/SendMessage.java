@@ -1,5 +1,7 @@
 package com.xingxin.mq;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -32,7 +34,8 @@ public class SendMessage {
         rabbitTemplate.setReturnCallback(returnCallbackService);
 
         //发送消息
-        rabbitTemplate.convertAndSend(exchange, routingKey, msg, new CorrelationData(id));
+        rabbitTemplate.convertAndSend(exchange, routingKey,
+                JSONObject.toJSONString(msg), new CorrelationData(id));
     }
 
 }

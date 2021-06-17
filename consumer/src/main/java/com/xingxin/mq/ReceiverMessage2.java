@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.rabbitmq.client.Channel;
 import com.xingxin.entity.Message;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.rabbit.annotation.*;
 import org.springframework.amqp.support.AmqpHeaders;
 import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.handler.annotation.Payload;
