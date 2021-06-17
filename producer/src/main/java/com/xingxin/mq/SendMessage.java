@@ -34,8 +34,7 @@ public class SendMessage {
         rabbitTemplate.setReturnCallback(returnCallbackService);
 
         //发送消息
-        rabbitTemplate.convertAndSend(exchange, routingKey,
-                JSONObject.toJSONString(msg), new CorrelationData(id));
+        rabbitTemplate.convertAndSend(exchange, routingKey, msg, new CorrelationData(id));
     }
 
 }

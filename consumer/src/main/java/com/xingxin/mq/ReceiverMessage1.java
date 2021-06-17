@@ -1,7 +1,6 @@
 package com.xingxin.mq;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.rabbitmq.client.Channel;
 import com.xingxin.entity.Message;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +29,7 @@ public class ReceiverMessage1 {
     )
     )
     @RabbitHandler//如果有消息过来，在消费的时候调用这个方法
-    public void receiverGetMessage(@Payload JSONObject msg, @Headers Map<String,Object> headers, Channel channel) throws IOException {
+    public void receiverGetMessage(@Payload Message msg, @Headers Map<String,Object> headers, Channel channel) throws IOException {
 
         log.info("ReceiverMessage1 get message, msg is : {}", JSON.toJSONString(msg));
 

@@ -1,9 +1,8 @@
 package com.xingxin.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
-import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +13,7 @@ import java.util.Date;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author mrLiu
@@ -27,7 +26,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class Message implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = -935185608005918820L;
 
     @TableId(value = "id", type = IdType.INPUT)
     private Integer id;

@@ -26,7 +26,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class Message implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = -935185608005918820L;
 
     @TableId(value = "id", type = IdType.INPUT)
     private Integer id;
