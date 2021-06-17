@@ -25,12 +25,10 @@ public class ConfirmCallbackService implements RabbitTemplate.ConfirmCallback {
 
     @Override
     public void confirm(CorrelationData correlationData, boolean ack, String cause) {
-        String status = "";
-        if (ack){
-            log.info("message get to exchange success!  correlationData={} ,ack={}, cause={}", correlationData.getId(), ack, cause);
-            status = "1";
-        }else {
-            log.error("message get to exchange failed!  correlationData={} ,ack={}, cause={}", correlationData.getId(), ack, cause);
+        log.info("message get to exchange , correlationData={} ,ack={}, cause={}", correlationData.getId(), ack, cause);
+        String status = "1";
+        if (!ack){
+            log.error("confirm ack false!  correlationData={} ,ack={}, cause={}", correlationData.getId(), ack, cause);
             status = "2";
         }
         //更新消息状态

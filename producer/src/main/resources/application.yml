@@ -28,7 +28,6 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
-
 #yun:
 #  mq:
 #    queue: test_msg_queue

@@ -18,7 +18,7 @@ public class ReturnCallbackService implements RabbitTemplate.ReturnCallback {
 
     @Override
     public void returnedMessage(Message message, int replyCode, String replyText, String exchange, String routingKey) {
-        log.info("message get to queue failed!  message={} ,replyCode={} ,replyText={} ,exchange={} ,routingKey={}",
+        log.error("message get to queue failed!  message={} ,replyCode={} ,replyText={} ,exchange={} ,routingKey={}",
                 JSON.toJSONString(message) ,replyCode, replyText, exchange, routingKey);
         /**
          * 记录当前消息的详细投递数据，方便后续做重发或者补偿等操作。
