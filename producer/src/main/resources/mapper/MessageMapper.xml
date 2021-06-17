@@ -8,8 +8,17 @@
         <result column="msg_id" property="msgId" />
         <result column="msg_data" property="msgData" />
         <result column="msg_status" property="msgStatus" />
+        <result column="try_count" property="tryCount" />
         <result column="creat_time" property="creatTime" />
         <result column="update_time" property="updateTime" />
     </resultMap>
+
+    <select id="selectMessageFailed" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        m.*
+        from message m
+        where m.msg_status = 2 and m.try_count &lt; 3
+        limit 0, #{limit,jdbcType=INTEGER}
+    </select>
 
 </mapper>

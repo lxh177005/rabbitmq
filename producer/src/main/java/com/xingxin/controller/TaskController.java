@@ -39,7 +39,12 @@ public class TaskController {
     @GetMapping("/message")
     @Scheduled(cron = "5/10 * * * * ?")
     public void messageTask() {
-
+        log.info("----messageTask start-----------");
+        List<Message> messages = messageService.selectMessageFailed(10);
+        for (Message msg : messages) {
+            log.info("sendMessage start... msg is : {}", msg);
+            sendMessage.sendMessage("msg_exchange", "msg.abc", msg, msg.getMsgId());
+        }
     }
 
     /**
@@ -48,7 +53,7 @@ public class TaskController {
     @GetMapping("/record/message")
     @Scheduled(cron = "0/10 * * * * ?")
     public void recordMessageTask() {
-        log.info("---------task start--------------");
+        log.info("---------recordMessageTask start--------------");
         List<RecordMessage> recordMessages = recordMessageService.selectRecordMessageFailed(10);
         for (RecordMessage recordMessage : recordMessages) {
             //select message

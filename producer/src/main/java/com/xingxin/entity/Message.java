@@ -37,6 +37,8 @@ public class Message implements Serializable {
 
     private Integer msgStatus;
 
+    private Integer tryCount;
+
     private Date creatTime;
 
     private Date updateTime;

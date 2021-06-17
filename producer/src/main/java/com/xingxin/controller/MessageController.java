@@ -38,18 +38,21 @@ public class MessageController {
     public boolean sendMessageTest() {
 
         try {
-            Message msg = new Message();
-            msg.setMsgId(UUID.randomUUID().toString());
-            msg.setMsgData("wahaha");
-            //状态0 发送中 1发送成功 2发送失败
-            msg.setMsgStatus(0);
-            msg.setCreatTime(new Date());
-            boolean save = messageService.save(msg);
-            if (!save) {
-                return false;
+            for (int i = 0; i < 100; i++) {
+                Message msg = new Message();
+                msg.setMsgId(UUID.randomUUID().toString());
+                msg.setMsgData("wahaha");
+                //状态0 发送中 1发送成功 2发送失败
+                msg.setMsgStatus(0);
+                msg.setTryCount(0);
+                msg.setCreatTime(new Date());
+                boolean save = messageService.save(msg);
+                if (!save) {
+                    return false;
+                }
+                log.info("sendMessage start... msg is : {}", msg);
+                sendMessage.sendMessage("msg_exchange", "msg.abc", msg, msg.getMsgId());
             }
-            log.info("sendMessage start... msg is : {}", msg);
-            sendMessage.sendMessage("msg_exchange", "msg.abc", msg, msg.getMsgId());
         } catch (Exception e) {
             log.error("sendMessage Exception is: ", e);
             return false;
