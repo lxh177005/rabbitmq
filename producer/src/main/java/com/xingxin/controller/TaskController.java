@@ -33,8 +33,20 @@ public class TaskController {
     @Autowired
     private SendMessage sendMessage;
 
+    /**
+     * 定时任务-对投递到交换机失败的消息进行补偿，重试超过3次放弃
+     */
+    @GetMapping("/message")
+    @Scheduled(cron = "5/10 * * * * ?")
+    public void messageTask() {
+
+    }
+
+    /**
+     * 定时任务-对未投递到队列的消息进行补偿，重试超过3次放弃
+     */
     @GetMapping("/record/message")
-    @Scheduled(cron = "0/15 * * * * ?")
+    @Scheduled(cron = "0/10 * * * * ?")
     public void recordMessageTask() {
         log.info("---------task start--------------");
         List<RecordMessage> recordMessages = recordMessageService.selectRecordMessageFailed(10);
@@ -49,10 +61,12 @@ public class TaskController {
             QueryWrapper<RecordMessage> rmWrapper = new QueryWrapper<>();
             RecordMessage rmNew = new RecordMessage();
             rmNew.setStatus(1);
+            rmNew.setTryCount(recordMessage.getTryCount()+1);
             rmWrapper.setEntity(recordMessage);
             recordMessageService.update(rmNew,rmWrapper);
             //record message
-            sendMessage.sendMessage(recordMessage.getExchange(),recordMessage.getRoutingKey(), msg.getMsgData(),recordMessage.getMsgId());
+            sendMessage.sendMessage(recordMessage.getExchange(),recordMessage.getRoutingKey(), msg, recordMessage.getMsgId());
         }
     }
+
 }

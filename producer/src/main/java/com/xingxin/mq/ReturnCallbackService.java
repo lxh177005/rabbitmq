@@ -50,7 +50,6 @@ public class ReturnCallbackService implements RabbitTemplate.ReturnCallback {
         rm.setStatus(2);
         if (ObjectUtils.isNotEmpty(recordMsg)) {
             //update
-            rm.setTryCount(recordMsg.getTryCount() + 1);
             rm.setUpdateTime(new Date());
             recordMessageService.update(rm, wrapper);
             return;
