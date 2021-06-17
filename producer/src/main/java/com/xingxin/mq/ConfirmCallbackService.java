@@ -14,7 +14,7 @@ import java.util.Date;
 /**
  * @author liuxh
  * @date 2021/6/15
- * 消息只要被 rabbitmq broker 接收到就会触发 confirmCallback 回调
+ * 消息只要到达exchange，就会触发ConfirmCallbackService
  */
 @Slf4j
 @Component
@@ -27,10 +27,10 @@ public class ConfirmCallbackService implements RabbitTemplate.ConfirmCallback {
     public void confirm(CorrelationData correlationData, boolean ack, String cause) {
         String status = "";
         if (ack){
-            log.info("message ack true , correlationData={} ,ack={}, cause={}", correlationData.getId(), ack, cause);
+            log.info("message get to exchange success!  correlationData={} ,ack={}, cause={}", correlationData.getId(), ack, cause);
             status = "1";
         }else {
-            log.error("message ack false !");
+            log.error("message get to exchange failed!  correlationData={} ,ack={}, cause={}", correlationData.getId(), ack, cause);
             status = "2";
         }
         //更新消息状态

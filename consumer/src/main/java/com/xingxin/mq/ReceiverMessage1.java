@@ -38,7 +38,7 @@ public class ReceiverMessage1 {
         Long deliveryTag = (Long) headers.get(AmqpHeaders.DELIVERY_TAG);
 
         /*
-         * ACK,确认一条消息已经被消费
+         * ACK,确认一条消息已经被消费,之后消息在队列里被删掉，防止重复消费
          * 参数2：是否批量确认，值为 true 则会一次性 ack所有小于当前消息 deliveryTag 的消息。
          * 举个栗子： 假设我先发送三条消息deliveryTag分别是5、6、7，可它们都没有被确认，
          * 当我发第四条消息此时deliveryTag为8，multiple设置为 true，会将5、6、7、8的消息全部进行确认。

@@ -14,8 +14,11 @@ spring:
     password: 123456
     host: 127.0.0.1
     port: 5672
-    publisher-confirm-type: correlated    #ack确认
+    ##ack确认,设置此属性配置可以确保消息成功发送到交换器
+    publisher-confirm-type: correlated
+    ##可以确保消息在未被队列接收时返回
     publisher-returns: true
+    ##指定消息在没有被队列接收时是否强行退回还是直接丢弃
     template:
       mandatory: true
 
