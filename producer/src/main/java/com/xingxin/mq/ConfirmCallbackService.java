@@ -26,10 +26,10 @@ public class ConfirmCallbackService implements RabbitTemplate.ConfirmCallback {
     @Override
     public void confirm(CorrelationData correlationData, boolean ack, String cause) {
         log.info("message get to exchange , correlationData={} ,ack={}, cause={}", correlationData.getId(), ack, cause);
-        String status = "1";
-        if (!ack){
+        Integer status = 1;
+        if (!ack) {
             log.error("confirm ack false!  correlationData={} ,ack={}, cause={}", correlationData.getId(), ack, cause);
-            status = "2";
+            status = 2;
         }
         //更新消息状态
         QueryWrapper<Message> wrapper = new QueryWrapper<>();
@@ -41,6 +41,6 @@ public class ConfirmCallbackService implements RabbitTemplate.ConfirmCallback {
         //状态0 发送中 1发送成功 2发送失败
         message.setMsgStatus(status);
         message.setUpdateTime(new Date());
-        messageService.update(message ,wrapper);
+        messageService.update(message, wrapper);
     }
 }

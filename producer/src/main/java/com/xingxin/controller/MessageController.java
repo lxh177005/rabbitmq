@@ -42,7 +42,7 @@ public class MessageController {
             msg.setMsgId(UUID.randomUUID().toString());
             msg.setMsgData("wahaha");
             //状态0 发送中 1发送成功 2发送失败
-            msg.setMsgStatus("0");
+            msg.setMsgStatus(0);
             msg.setCreatTime(new Date());
             boolean save = messageService.save(msg);
             if (!save) {

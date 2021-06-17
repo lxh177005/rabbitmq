@@ -18,12 +18,13 @@ public class CodeGenerator {
                 .setEnableCache(false)
                 //这个位置的位置是自己项目的路径到java文件夹下
                 .setOutputDir("D:\\codeGenerator")
-                .setFileOverride(true)//覆盖生成的文件
+                //覆盖生成的文件
+                .setFileOverride(true)
                 .setIdType(IdType.INPUT)
                 .setServiceName("%sService")
                 .setBaseResultMap(true)
                 .setBaseColumnList(true)
-                .setAuthor("mrLiu")
+                .setAuthor("liuxh")
                 .setOpen(false);
         //2、数据源配置
         DataSourceConfig dataSourceConfig = new DataSourceConfig();
@@ -44,7 +45,7 @@ public class CodeGenerator {
                 .setNaming(NamingStrategy.underline_to_camel)
 //                TODO
                 //需要导入的表的名称,支持多表，"，"隔开
-                .setInclude("message")
+                .setInclude("record_message")
                 //需要导入表删除前缀（如：xxx_xx,删除完前缀是xx,只剩下表名）
                 .setTablePrefix("");
 

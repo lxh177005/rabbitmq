@@ -36,7 +36,7 @@ public class Message implements Serializable {
 
     private String msgData;
 
-    private String msgStatus;
+    private Integer msgStatus;
 
     private Date creatTime;
 
