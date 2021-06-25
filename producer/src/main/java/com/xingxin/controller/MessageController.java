@@ -5,14 +5,11 @@ import com.xingxin.entity.Message;
 import com.xingxin.mq.SendMessage;
 import com.xingxin.service.MessageService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
@@ -35,10 +32,12 @@ public class MessageController {
     private SendMessage sendMessage;
 
     @GetMapping("/send")
-    public boolean sendMessageTest() {
-
+    public boolean sendMessageTest(Integer count) {
+        if (count == null || count < 1) {
+            count = 1;
+        }
         try {
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < count; i++) {
                 Message msg = new Message();
                 msg.setMsgId(UUID.randomUUID().toString());
                 msg.setMsgData("wahaha");
